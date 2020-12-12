@@ -55,6 +55,24 @@ def two_banger(states)
 end
 p two_banger(states)
 
+numbers = 1..10
+
+# sum: Imperative Version
+def imperative_sum(numbers)
+	total = 0
+	numbers.each do |n|
+		total += n
+	end
+	total
+end
+p imperative_sum(numbers)
+
+# sum: Functional Version
+def functional_sum(numbers)
+	numbers.reduce { |total, n| total += n }
+end
+p functional_sum(numbers)
+
 
 
 
