@@ -18,12 +18,12 @@ p imperative_urls(states)
 
 # urls: Functional Version
 def functional_urls(states)
-	states.map { |state| urlify(state) }
+	states.collect { |state| urlify(state) }
 end
 p functional_urls(states)
 
 def example_url(states)
-	states.map { |state| "https://example.com/" + urlify(state) }
+	states.collect { |state| "https://example.com/" + urlify(state) }
 end
 p example_url(states)
 
@@ -41,17 +41,17 @@ p imperative_singles(states)
 
 # singles: Functional version
 def functional_singles(states)
-  states.select { |state| state.split.length == 1 }
+  states.reject { |state| state.split.length == 1 }
 end
 p functional_singles(states)
 
 def dakotas(states)
-	states.select { |state| state.include?("Dakota") }
+	states.reject { |state| state.include?("Dakota") }
 end
 p dakotas(states)
 
 def two_banger(states)
-	states.select { |state| state.split.length == 2 }
+	states.reject { |state| state.split.length == 2 }
 end
 p two_banger(states)
 
@@ -69,11 +69,43 @@ p imperative_sum(numbers)
 
 # sum: Functional Version
 def functional_sum(numbers)
-	numbers.reduce { |total, n| total += n }
+	numbers.inject { |total, n| total += n }
 end
 p functional_sum(numbers)
 
 
+# lengths: Imperative version
+def imperative_lengths(states)
+	lengths = {}
+	states.each do |state|
+		lengths[state] = state.length
+	end
+	lengths
+end
+puts imperative_lengths(states)
+
+# lengths: Functional version
+def functional_lengths(states)
+	states.inject({}) do |lengths, state|
+		lengths[state] = state.length
+		lengths
+	end
+end
+puts functional_lengths(states)
+
+# product: Imperative version
+def imperative_product(numbers)
+	total = 1
+	numbers.each do |n|
+		total *= n
+	end
+	total
+end
+puts imperative_product(numbers)
+
+# product: functional version
+def functional_product(numbers) numbers.inject { |total, n| total *=n} end
+puts functional_product(numbers)
 
 
 
